@@ -5,7 +5,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by 冰封承諾Andy on 2019/4/21.
- * volatile 不能保证原子性的测试
+ *
+ * volatile 不能保证原子性的测试；
+ * 准确来说 volatile 能保证部分的原子性，例如基本数据类型基本可以保证原子性（i++ 不是一条指令）
+ *
+ * volatile 的实现原理是内存屏障（锁）
  */
 public class AtomicTest {
     private static volatile int num;

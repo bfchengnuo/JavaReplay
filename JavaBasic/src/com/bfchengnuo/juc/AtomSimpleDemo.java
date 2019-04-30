@@ -17,6 +17,9 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  * ABA 问题： 记录版本，对应的类
  * 一个共享变量？ 使用
  * 循环（自旋）开销大？ 使用对应的汇编指令，详见《Java并发编程的艺术》
+ *
+ * CAS 也是一种比较重的操作，偏向锁 < CAS < 重锁（完全互斥）
+ * 偏向锁就是在避免 CAS 操作，但是偏向锁的触发条件是同线程
  */
 public class AtomSimpleDemo {
     /**
