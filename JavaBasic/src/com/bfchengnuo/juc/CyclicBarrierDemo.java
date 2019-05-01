@@ -10,6 +10,7 @@ import java.util.concurrent.CyclicBarrier;
  *
  * 简单说它与 CountDownLatch 相反，一个是减到一定的程度，一个是加到一定的程度
  *
+ * 使用线程池执行时，要注意 CyclicBarrier 计数完成后不会自动重置，需要在全部执行完成前手动 reset (超时可能会抛出异常)
  */
 public class CyclicBarrierDemo {
     private static CyclicBarrier cyclicBarrier = new CyclicBarrier(4, () -> System.out.println("全部到达临界点！"));
@@ -21,6 +22,8 @@ public class CyclicBarrierDemo {
                     System.out.println(Thread.currentThread().getId() + " 进入...");
 
                     // 在所有参与者都已经在此 barrier 上调用 await 方法之前，将一直等待。
+                    // 相当于先计数 -1 再判断 > 0
+                    // cyclicBarrier.await() =  countDownLatch.countDown() + await()
                     cyclicBarrier.await();
 
                     System.out.println(Thread.currentThread().getId() + " 完成...");
@@ -30,6 +33,8 @@ public class CyclicBarrierDemo {
                     e.printStackTrace();
                 }
             }).start();
+
+            cyclicBarrier.reset();
         }
     }
 }

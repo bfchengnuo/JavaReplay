@@ -26,6 +26,8 @@ import java.util.WeakHashMap;
  * 强引用我们平常使用的最多，软、弱在缓存方面使用的比较多，例如 Mybatis 的缓存；
  *
  * 软、弱引用在回收时会先添加到 ReferenceQueue
+ *
+ * 在 ThreadLocal 中的 ThreadLocalMap 里的 Entry extends WeakReference<ThreadLocal> 所以它是一个弱引用
  */
 public class ReferenceTest {
     public static void main(String[] args) throws InterruptedException {
