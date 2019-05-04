@@ -37,9 +37,15 @@ import java.util.concurrent.*;
  * maximumPoolSize 如何合理配置？
  *      CPU 密集型，没有阻塞，一直全速运行，一般设置为 核数+1
  *      IO 密集型，一般并不是一直在执行任务（有阻塞），一般为 核数*2 或者 核数/(1-阻塞系数)，阻塞系数在 0.8-0.9
+ *
+ * 线程的状态见 java.lang.Thread.State 枚举类;
+ * see https://github.com/bfchengnuo/MyRecord/issues/35  线程中的状态
  */
 public class ThreadPoolDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        // 线程池发生异常的捕获
+        exceptionHandle();
+
         // ExecutorService executorService = Executors.newFixedThreadPool(3);
         ExecutorService executorService = new ThreadPoolExecutor(2, 6,
                 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(5),
@@ -51,5 +57,33 @@ public class ThreadPoolDemo {
         } finally {
             executorService.shutdown();
         }
+
+        // 对于 SingleThreadExecutor 来说，executorService 不再被引用，它会被 GC -> finalize() -> shutdown()
+        // ExecutorService executorService2 = Executors.newSingleThreadExecutor();
+    }
+
+    /**
+     * 线程池对异常情况的处理;
+     * 1.通过覆盖线程池的 afterExecute 方法实现对异常的处理（不过就没办法把异常给 catch）
+     */
+    private static void exceptionHandle() throws InterruptedException {
+        // ExecutorService executorService = Executors.newFixedThreadPool(3);
+        ExecutorService executorService = new ThreadPoolExecutor(2, 6,
+                1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(5),
+                Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy()){
+            @Override
+            protected void afterExecute(Runnable r, Throwable t) {
+                System.out.println(Thread.currentThread().getId() + "出现错误...");
+            }
+        };
+
+        executorService.execute(()->{
+            throw new RuntimeException("test exp");
+        });
+
+        // 等待一秒确保提交的任务完成
+        executorService.awaitTermination(1, TimeUnit.SECONDS);
+
+        executorService.shutdown();
     }
 }
