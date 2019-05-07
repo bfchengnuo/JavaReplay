@@ -1,3 +1,14 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.bfchengnuo.diveinspring.assemble.springboot.HelloWorldAutoConfiguration
+
+
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+com.bfchengnuo.diveinspring.application.context.AfterHelloWorldContextInitializer,\
+com.bfchengnuo.diveinspring.application.context.HelloWorldContextInitializer
+
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.bfchengnuo.diveinspring.application.listener.HelloWorldApplicationListener
