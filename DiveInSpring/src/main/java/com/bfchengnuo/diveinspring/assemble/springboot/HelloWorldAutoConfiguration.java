@@ -16,6 +16,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableHelloWorld
-@ConditionalOnSystemProperty(name = "user.name", val = "lvxue")
+@ConditionalOnSystemProperty(name = "user.name", val = "loli")
 public class HelloWorldAutoConfiguration {
 }

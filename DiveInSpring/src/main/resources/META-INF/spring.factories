@@ -11,4 +11,10 @@ com.bfchengnuo.diveinspring.application.context.HelloWorldContextInitializer
 
 # Application Listeners
 org.springframework.context.ApplicationListener=\
-com.bfchengnuo.diveinspring.application.listener.HelloWorldApplicationListener
+com.bfchengnuo.diveinspring.application.listener.HelloWorldApplicationListener,\
+com.bfchengnuo.diveinspring.application.listener.BeforeConfigFileApplicationListener
+
+
+# Run Listeners (SpringBoot 依赖)
+org.springframework.boot.SpringApplicationRunListener=\
+com.bfchengnuo.diveinspring.application.listener.HelloWorldRunListener
