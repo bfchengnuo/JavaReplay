@@ -1,14 +1,22 @@
 package com.bfchengnuo.java8.stream;
 
+import com.bfchengnuo.java8.stream.po.Dish;
+
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.*;
 
 /**
  * 使用集合的 stream 来进行分组聚合的小例子
+ *
+ * 分区是分组的特殊情况：由一个谓词（返回一个布尔值的函数）作为分类函数，它称分区函数。
+ * 分区函数返回一个布尔值，这意味着得到的分组 Map 的键类型是 Boolean ，
+ * 于是它最多可以分为两组: true 是一组， false 是一组。
+ *
+ * 综合例子： {@link GroupDemo#example()}
  *
  * @author Created by 冰封承諾Andy on 2019/6/24.
  */
@@ -25,6 +33,7 @@ public class GroupDemo {
         // 聚合分组，首先按照性别分，然后再按照年龄分
         Map<Character, Map<Integer, List<User>>> collectMap = userList.stream().collect(
                 Collectors.groupingBy(
+                        // 这里可以有进行判断处理的复杂逻辑
                         User::getSex,
                         // 二级分组
                         Collectors.groupingBy(User::getAge)
@@ -123,5 +132,24 @@ public class GroupDemo {
                     ", data=" + data +
                     '}';
         }
+    }
+
+    /**
+     * 一个比较综合的例子
+     */
+    private static void example() {
+        List<Dish> menu = Dish.menu;
+        Map<Boolean, Dish> mostCaloricPartitionedByVegetarian =
+                menu.stream().collect(
+                        // 根据对流中每个项目应用谓词的结果来对项目进行分区
+                        partitioningBy(
+                                Dish::isVegetarian,
+                                // 包裹另一个收集器，对其结果应用转换函数
+                                collectingAndThen(
+                                        maxBy(comparingInt(Dish::getCalories)),
+                                        Optional::get
+                                )
+                        )
+                );
     }
 }
