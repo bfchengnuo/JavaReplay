@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * <p>
  * 由于 StringUtils 拥有 100+ 的方法，我们只能选部分常用的来说
  */
+@SuppressWarnings("ALL")
 public class StringUtilsTest {
     public static void main(String[] args) {
         String str = "Hello World";

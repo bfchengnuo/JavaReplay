@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * 反射相关的工具类，例如 ClassUtilsTest、FieldUtils、MethodUtils、ConstructorUtils
  */
+@SuppressWarnings("ALL")
 public class ReflectionUtilsTest implements Serializable {
     private String name;
 
