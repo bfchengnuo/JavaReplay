@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 
@@ -12,9 +13,10 @@ import org.springframework.context.event.EventListener;
  * 自动生成，保留用，无意义
  * 在 @SpringBootApplication 中内含 @EnableAutoConfiguration
  *
- * 补充：查看嵌入的 web 服务器类型
+ * 补充：查看嵌入的 web 服务器类型，servlet3.0 规范的异步测试
  */
 @SpringBootApplication
+@ServletComponentScan("com.bfchengnuo.diveinspring.servlet")
 public class DiveInSpringApplication {
 
     public static void main(String[] args) {
