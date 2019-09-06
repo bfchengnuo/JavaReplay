@@ -4,6 +4,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.*;
+import java.util.Date;
 import java.util.Locale;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -32,6 +33,28 @@ public class NewDateTimeApiDemo {
         lambdaForm();
         // 自定义格式化器
         customizeFormatter();
+
+        // 与老 API util.Date 的转换
+        apiConversion();
+    }
+
+    /**
+     * 新旧 API 之间的转换
+     *
+     * Date 对象表示特定的日期和时间，而 LocalDate(Java8) 对象只包含没有任何时间信息的日期。
+     * 因此，如果我们只关心日期而不是时间信息，则可以在 Date 和 LocalDate 之间进行转换。
+     */
+    private static void apiConversion() {
+        // Date 转 LocalDate、LocalDateTime
+        Date date = new Date();
+        date2LocalDate(date);
+        date2LocalDateTime(date);
+
+        // LocalDate、LocalDateTime 转 Date
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        localDate2Date(localDate);
+        localDateTime2Date(localDateTime);
     }
 
     /**
@@ -275,5 +298,57 @@ public class NewDateTimeApiDemo {
 
             return temporal.plus(dayToAdd, ChronoUnit.DAYS);
         }
+    }
+
+
+    /**
+     * Date 转换为 LocalDateTime
+     *
+     * @param date 旧日期类型
+     * @return 新时间类型对象
+     */
+    private static LocalDateTime date2LocalDateTime(Date date){
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return instant.atZone(zoneId).toLocalDateTime();
+    }
+
+    /**
+     * LocalDateTime 转换为 Date
+     *
+     * @param localDateTime 新类型时间
+     * @return 旧类型日期对象
+     */
+    private static Date localDateTime2Date( LocalDateTime localDateTime){
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zdt = localDateTime.atZone(zoneId);
+        return Date.from(zdt.toInstant());
+    }
+
+    /**
+     * Date 转 LocalDate (日期信息保留，时间信息抹掉)
+     *
+     * @param date 原始日期
+     * @return 新日期类型
+     */
+    private static LocalDate date2LocalDate(Date date) {
+        // 获取时间戳
+        Instant instant = date.toInstant();
+        // 亚洲时区： ZoneId.of("Asia/Shanghai");
+        ZoneId zoneId = ZoneId.systemDefault();
+        // atZone() 方法返回在指定时区从此 Instant 生成的 ZonedDateTime。
+        return instant.atZone(zoneId).toLocalDate();
+    }
+
+    /**
+     * LocalDate 转 Date (无时间信息)
+     *
+     * @param localDate 新类型日期
+     * @return 旧类型日期对象
+     */
+    private static Date localDate2Date(LocalDate localDate) {
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
+        return Date.from(zdt.toInstant());
     }
 }
