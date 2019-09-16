@@ -1,0 +1,48 @@
+data:
+  user: skye
+logging:
+  level:
+    com.bfchengnuo.uselibraries: debug
+  file: UseLibraries.log
+mail:
+  to: kerronex@bfchengnuo.com
+  to-address: kerronex@bfchengnuo.com
+
+
+spring:
+  datasource:
+    primary:
+      jdbc-url: jdbc:mysql://10.1.2.40:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+      username: xxxx
+      password: xxxx
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    secondary:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+      username: loli
+      password: 123
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  freemarker:
+    charset: UTF-8
+    allow-request-override: false
+    cache: false
+    expose-request-attributes: false
+    expose-session-attributes: false
+    content-type: text/html
+    template-loader-path: classpath:/templates/
+    expose-spring-macro-helpers: false
+    check-template-location: true
+    enabled: true
+
+
+  mail:
+    host: smtp.exmail.qq.com
+    username: app@bfchengnuo.com
+    password: xxxxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
