@@ -1,6 +1,13 @@
 package com.bfchengnuo.uselibraries.common;
 
+import com.bfchengnuo.uselibraries.spring.web.validator.MyValidator;
+import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 /**
  * 供测试的一个简单的实体对象
@@ -17,4 +24,32 @@ public class User {
     private String name;
     private Integer age;
     private String desc;
+
+
+    public interface UserSimpleView {}
+    public interface UserDetailView extends UserSimpleView {}
+
+    @JsonView(UserSimpleView.class)
+    private String id;
+
+    @JsonView(UserSimpleView.class)
+    @NotBlank(message = "用户名不能为空")
+    @ApiModelProperty("用户名")
+    private String userName;
+
+    @JsonView(UserDetailView.class)
+    @MyValidator
+    @ApiModelProperty("用户密码")
+    private String pwd;
+
+    @JsonView(UserSimpleView.class)
+    @Past(message = "生日必须是过去的时间")
+    private Date birthday;
+
+    public User(String id, @NotBlank(message = "用户名不能为空") String userName, String pwd, @Past(message = "生日必须是过去的时间") Date birthday) {
+        this.id = id;
+        this.userName = userName;
+        this.pwd = pwd;
+        this.birthday = birthday;
+    }
 }
