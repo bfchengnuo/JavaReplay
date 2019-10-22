@@ -1,0 +1,73 @@
+data:
+  user: skye
+logging:
+  level:
+    com.bfchengnuo.uselibraries: debug
+  file: UseLibraries.log
+mail:
+  to: kerronex@bfchengnuo.com
+  to-address: kerronex@bfchengnuo.com
+
+
+spring:
+  datasource:
+    primary:
+      jdbc-url: jdbc:mysql://10.1.2.40:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+      username: xxxx
+      password: xxxx
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    secondary:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+      username: loli
+      password: 12358
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    pool:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+      username: loli
+      password: 12358
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 配置监控统计拦截的 filters，去掉后监控界面 sql 无法统计，'wall' 用于防火墙
+      filters: stat,wall,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#        schema:
+#          - classpath:dept.sql
+
+  freemarker:
+    charset: UTF-8
+    allow-request-override: false
+    cache: false
+    expose-request-attributes: false
+    expose-session-attributes: false
+    content-type: text/html
+    template-loader-path: classpath:/templates/
+    expose-spring-macro-helpers: false
+    check-template-location: true
+    enabled: true
+
+
+  mail:
+    host: smtp.exmail.qq.com
+    username: app@bfchengnuo.com
+    password: xxxxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
