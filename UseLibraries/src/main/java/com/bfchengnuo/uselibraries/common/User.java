@@ -26,12 +26,17 @@ public class User {
     private Integer age;
     private String desc;
 
+    public User(String name, Integer age, String desc) {
+        this.name = name;
+        this.age = age;
+        this.desc = desc;
+    }
 
     public interface UserSimpleView {}
     public interface UserDetailView extends UserSimpleView {}
 
     @JsonView(UserSimpleView.class)
-    private String id;
+    private String no;
 
     @JsonView(UserSimpleView.class)
     @NotBlank(message = "用户名不能为空")
@@ -47,8 +52,8 @@ public class User {
     @Past(message = "生日必须是过去的时间")
     private Date birthday;
 
-    public User(String id, @NotBlank(message = "用户名不能为空") String userName, String pwd, @Past(message = "生日必须是过去的时间") Date birthday) {
-        this.id = id;
+    public User(String no, @NotBlank(message = "用户名不能为空") String userName, String pwd, @Past(message = "生日必须是过去的时间") Date birthday) {
+        this.no = no;
         this.userName = userName;
         this.pwd = pwd;
         this.birthday = birthday;
