@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -29,9 +31,34 @@ import java.util.Properties;
 @Slf4j
 public class ToolsDemo {
     public static void main(String[] args) throws Exception {
+        assertDemo();
         beanCopy();
         fileUtil();
         propertiesUtil();
+    }
+
+    /**
+     * 断言工具类的使用
+     * 达不到预期直接抛出异常
+     */
+    private static void assertDemo() {
+        // 对象必须为 true
+        Assert.isTrue(true, "object must be true");
+
+        // 不为 null 且必须至少包含一个非空格的字符
+        Assert.hasText("", "text must not be empty");
+
+        // 对象非空
+        Assert.notNull(null, "object is required");
+
+        //  集合非空
+        Assert.notEmpty(new ArrayList<>(), "collection must not be empty");
+
+        // 字符不为 null 且字符长度不为 0
+        Assert.hasLength("", "text must be specified");
+
+        // obj 必须能被正确造型成为 clazz 指定的类
+        Assert.isInstanceOf(Object.class, new Object(), "clazz must be of type [clazz]");
     }
 
     /**
