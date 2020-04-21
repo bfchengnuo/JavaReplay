@@ -11,16 +11,18 @@ mail:
 
 spring:
   datasource:
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
     primary:
       jdbc-url: jdbc:mysql://10.1.2.40:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
       username: xxxx
       password: xxxx
       driver-class-name: com.mysql.cj.jdbc.Driver
     secondary:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
-      username: loli
-      password: 12358
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:h2:mem:test
+      username: root
+      password: test
+      driver-class-name: org.h2.Driver
     pool:
       jdbc-url: jdbc:mysql://127.0.0.1:3306/agrihfnj?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
       username: loli
@@ -71,3 +73,8 @@ spring:
           starttls:
             enable: true
             required: true
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
