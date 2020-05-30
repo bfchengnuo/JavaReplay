@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+#      无密码
+#      uri: mongodb://localhost:27017/webflux
+      host: localhost
+      port: 27017
+      database: webflux
+      username: mps
+      password: 12345..
