@@ -10,6 +10,18 @@ mail:
 
 
 spring:
+  # 视图解析器配置，通过 starter 自动配置
+#  mvc:
+#    view:
+#      prefix: /templates/
+#      suffix: .jsp
+  resources:
+    # 默认值就是：
+    # /static
+    # /public
+    # /resources
+    # /META-INF/resources
+    static-locations: classpath:/static/
   datasource:
     schema: classpath:db/schema-h2.sql
     data: classpath:db/data-h2.sql
