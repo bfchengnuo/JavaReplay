@@ -11,6 +11,8 @@ import java.util.concurrent.CyclicBarrier;
  * 简单说它与 CountDownLatch 相反，一个是减到一定的程度，一个是加到一定的程度
  *
  * 使用线程池执行时，要注意 CyclicBarrier 计数完成后不会自动重置，需要在全部执行完成前手动 reset (超时可能会抛出异常)
+ *
+ * 相比 CountDownLatch，它可以使用 reset 方法重置并让线程重新执行。
  */
 public class CyclicBarrierDemo {
     private static CyclicBarrier cyclicBarrier = new CyclicBarrier(4, () -> System.out.println("全部到达临界点！"));

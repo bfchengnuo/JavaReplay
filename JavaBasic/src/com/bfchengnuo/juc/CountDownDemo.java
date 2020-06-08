@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by 冰封承諾Andy on 2019/4/22.
  * CountDownLatch 一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。
+ * 只可使用一次。
  */
 public class CountDownDemo {
     public static void main(String[] args) throws InterruptedException {

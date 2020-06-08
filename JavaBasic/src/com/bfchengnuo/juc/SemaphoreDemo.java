@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
  * Created by 冰封承諾Andy on 2019/4/23.
  *
  * 一个计数信号量，信号量维护了一个许可集允许指定数量的执行，其他被阻塞
+ * 适用于做流控。
  */
 public class SemaphoreDemo {
     /**
