@@ -5,6 +5,11 @@ import java.util.concurrent.*;
 /**
  * Created by 冰封承諾Andy on 2019/4/23.
  *
+ * 使用线程池的好处：
+ * - 降低资源消耗
+ * - 提高响应速度
+ * - 提高线程的可管理性
+ *
  * 常用的线程池，核心类 ThreadPoolExecutor / Executors(不推荐，参考阿里规范)
  *
  * - newCachedThreadPool - 带有缓存的，也就是大小可变的，适合执行短期的异步小程序，负担较轻的服务器；
@@ -40,6 +45,8 @@ import java.util.concurrent.*;
  *
  * 线程的状态见 java.lang.Thread.State 枚举类;
  * see https://github.com/bfchengnuo/MyRecord/issues/35  线程中的状态
+ *
+ * PS：使用 guava 的 ThreadFactoryBuilder#setNameFormat 可以快速给线程池里的线程设置名字。
  */
 public class ThreadPoolDemo {
     public static void main(String[] args) throws InterruptedException {

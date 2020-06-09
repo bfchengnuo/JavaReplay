@@ -5,8 +5,9 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Created by 冰封承諾Andy on 2019/4/23.
- * FutureTask 的简单使用;
- * 多个线程执行同一个 FutureTask，最终只会执行一次
+ * FutureTask 的简单使用(基于 AQS);
+ * 多个线程执行同一个 FutureTask，最终只会执行一次;
+ * 同时，它可以感知中断，例如 cancel 方法，传入 true 会以中断的方式试图终止任务。
  */
 public class FutureDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
