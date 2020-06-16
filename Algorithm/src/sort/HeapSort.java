@@ -4,6 +4,10 @@ package sort;
  * Created by 冰封承諾Andy on 2019/3/7.
  * <p>
  * 堆排序
+ * 堆排序是一种原地的、不稳定的、时间复杂度为 O(nlogn) 的排序算法;
+ * 在实际的软件开发中，快速排序的性能要比堆排序好
+ *
+ * see: https://bfchengnuo.com/2019/04/03/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E-%E6%8E%92%E5%BA%8F/#%E5%A0%86%E6%8E%92%E5%BA%8F
  */
 public class HeapSort {
 
