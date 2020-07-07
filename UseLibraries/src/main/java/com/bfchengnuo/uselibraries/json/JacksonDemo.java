@@ -11,6 +11,14 @@ import java.util.List;
 
 /**
  * Jackson 解析示例
+ * 注意 {@link TypeReference} 的使用，以及常用注解：
+ * - @JsonIgnore
+ * - @JsonIgnoreProperties (作用在类上，类级别)
+ * - @JsonIgnoreType （作用类上，其他类含有此类的类型不输出）
+ * - @JsonPropertyOrder
+ * - @JsonInclude （序列化时，根据条件是否输出）
+ * - @JsonSetter （作用在 set 方法，处理反序列化名称不统一问题）
+ *
  * @author 冰封承諾Andy
  * @date 2020/6/21
  */
