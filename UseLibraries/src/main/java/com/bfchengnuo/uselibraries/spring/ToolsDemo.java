@@ -27,6 +27,7 @@ import java.util.Properties;
  * Spring 中自带的非常实用的工具类
  * TBD StreamUtils
  *
+ * MVC 文件上传下载还可以参考 {@link com.bfchengnuo.uselibraries.spring.web.FileController}
  * @author Created by 冰封承諾Andy on 2019/6/30.
  */
 @Slf4j
