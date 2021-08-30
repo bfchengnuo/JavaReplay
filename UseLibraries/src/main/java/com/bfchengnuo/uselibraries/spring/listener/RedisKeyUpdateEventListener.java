@@ -35,6 +35,9 @@ public class RedisKeyUpdateEventListener extends KeyspaceEventMessageListener im
     public RedisKeyUpdateEventListener(RedisMessageListenerContainer listenerContainer, RedisTemplate<String,Object> redisTemplate) {
         super(listenerContainer);
         this.redisTemplate = redisTemplate;
+
+        // 避免无 Redis 的 CONFIG 权限，AWS
+        setKeyspaceNotificationsConfigParameter("");
     }
 
     @Override
