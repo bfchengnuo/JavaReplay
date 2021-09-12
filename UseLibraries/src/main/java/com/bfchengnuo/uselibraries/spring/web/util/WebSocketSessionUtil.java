@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.util.Set;
@@ -25,7 +24,7 @@ public class WebSocketSessionUtil {
     /**
      * 结构：用户类型 : <pid:session>
      */
-    @Resource
+    // @Resource
     private ImmutableMap<String, ConcurrentMap<String, Set<Session>>> websocketSessionMap;
     /**
      * 如果使用了 spring 的 OAuth2 作为认证，可以使用 ResourceServerTokenServices 来验证 token
