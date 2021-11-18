@@ -14,6 +14,9 @@ import javax.sql.DataSource;
  * 多数据源配置
  * JPA 集成参考： http://blog.didispace.com/springbootmultidatasource/
  *
+ * 使用 MP 的话可以试试提供的动态数据源 dynamic-datasource-spring-boot-starter
+ * https://baomidou.com/guide/dynamic-datasource.html
+ *
  * @author Created by 冰封承諾Andy on 2019/9/16.
  */
 @Configuration
